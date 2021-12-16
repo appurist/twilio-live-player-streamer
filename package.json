@@ -1,0 +1,22 @@
+{
+  "name": "player-streamer",
+  "version": "0.0.1",
+  "description": "the.site player streamer",
+  "engines": {
+    "node": "^12"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=development ACCOUNT_SID=accountSID  API_KEY_SID=apiKey API_KEY_SECRET=apiSecret node src/main.js",
+    "staging": "NODE_ENV=staging ACCOUNT_SID=accountSID  API_KEY_SID=apiKey API_KEY_SECRET=apiSecret node src/main.js",
+    "prod": "NODE_ENV=production ACCOUNT_SID=accountSID  API_KEY_SID=apiKey API_KEY_SECRET=apiSecret node src/main.js"
+  },
+  "keywords": [
+    "node"
+  ],
+  "private": true,
+  "author": "Paul Whittemore",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8"
+  }
+}
