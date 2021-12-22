@@ -1,32 +1,52 @@
 const process = require('process');
 
-async function init()
-{
-  console.log ("ACCOUNT_SID:", process.env.ACCOUNT_SID);
-  console.log ("API_KEY_SID:", process.env.API_KEY_SID);
-  console.log ("API_KEY_SECRET:", process.env.API_KEY_SECRET);
-  console.log("Initialized.");
-  return 0;
-}
+const { roomName } = require('./config.js');
+const { createRoom, endRoom, dumpRooms } = require('./room.js');
+const { createStreamer, endStreamer, endIdleStreamers } = require('./streamer.js');
+const { createServer } = require('./api.js')
+
+let room;
 
 async function run()
 {
-  return 0;
+  return await createServer();
 }
 
-let rc = 1;
+function shutdown(rc) {
+  endStreamer();
+  process.exit(1);
+}
+
+async function init() {
+  try {
+    dumpRooms();
+    room = await createRoom(roomName);
+    console.log(`Connected to room: '${roomName}':`, room);
+
+    // returns the first non-idle streamer
+    player_streamer = await endIdleStreamers();
+    if (player_streamer) {
+      console.log("Found existing streamer:", player_streamer.sid, JSON.stringify(player_streamer));
+    } else {
+      player_streamer = await createStreamer();
+      console.log("Created streamer:", player_streamer.sid, JSON.stringify(player_streamer));
+    }
+  } catch (err) {
+    console.error("Error:", err);
+  }
+}
+
+let rc = 0;
 try {
   init().then(async () => {
-    rc = await run();
-    console.log("Complete.");
-    process.exit(rc);
+    await run();
   })
   .catch(e => { 
     console.log("Run", e);
-    process.exit(1);
+    shutdown(1);
   });
 } catch(e) {
   console.log("Exception", e);
-  process.exit(2);
+  shutdown(2);
 }
 // does not exit here, exits when run() completes or exception

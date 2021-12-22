@@ -6,9 +6,9 @@
     "node": "^12"
   },
   "scripts": {
-    "dev": "NODE_ENV=development ACCOUNT_SID=accountSID  API_KEY_SID=apiKey API_KEY_SECRET=apiSecret node src/main.js",
-    "staging": "NODE_ENV=staging ACCOUNT_SID=accountSID  API_KEY_SID=apiKey API_KEY_SECRET=apiSecret node src/main.js",
-    "prod": "NODE_ENV=production ACCOUNT_SID=accountSID  API_KEY_SID=apiKey API_KEY_SECRET=apiSecret node src/main.js"
+    "dev": "NODE_ENV=development node src/main.js",
+    "staging": "NODE_ENV=staging node src/main.js",
+    "prod": "NODE_ENV=production node src/main.js"
   },
   "keywords": [
     "node"
@@ -18,5 +18,10 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "ts-node-dev": "^1.1.8"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "twilio": "^3.72.0"
   }
 }
