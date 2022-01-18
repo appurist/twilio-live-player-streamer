@@ -14,6 +14,7 @@ async function run()
 
 function shutdown(rc) {
   endStreamer();
+  endRoom(roomName);
   process.exit(1);
 }
 
@@ -21,18 +22,19 @@ async function init() {
   try {
     dumpRooms();
     room = await createRoom(roomName);
-    console.log(`Connected to room: '${roomName}':`, room);
+    console.log(`Connected to room '${roomName}'.`);
 
     // returns the first non-idle streamer
     player_streamer = await endIdleStreamers();
     if (player_streamer) {
-      console.log("Found existing streamer:", player_streamer.sid, JSON.stringify(player_streamer));
+      console.log("Found existing streamer:", player_streamer.sid);
     } else {
       player_streamer = await createStreamer();
       console.log("Created streamer:", player_streamer.sid, JSON.stringify(player_streamer));
     }
   } catch (err) {
     console.error("Error:", err);
+    return undefined;
   }
 }
 

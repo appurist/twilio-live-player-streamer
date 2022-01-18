@@ -20,7 +20,7 @@ function initClient(roomName) {
   token.addGrant(videoGrant);
  
   // Serialize the token to a JWT string
-  console.log(token.toJwt());
+  // console.log(token.toJwt());
 }
 
 async function dumpStreamers() {
@@ -46,7 +46,6 @@ async function endIdleStreamers() {
           console.log(`Ended streamer: ${p.sid} (was ${p.status}.`);
         } else {
           result = p;
-          console.log("Found available streamer:", p.sid, p.status);
         }
       }
     });
