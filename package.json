@@ -1,7 +1,7 @@
 {
   "name": "player-streamer",
   "version": "0.0.1",
-  "description": "the.site player streamer",
+  "description": "player streamer PoC combining and completing samples",
   "engines": {
     "node": "^12"
   },
